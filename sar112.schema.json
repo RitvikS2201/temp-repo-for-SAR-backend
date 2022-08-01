@@ -1,0 +1,49 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://isearch.calpoly.edu/template.schema.json",
+    "title": "Sar 112",
+    "description": "Sar 112 schema",
+    "type": "object",
+    "properties": {
+      "assignmentNumber": { 
+        "description": "Assignment Number",
+        "type": "string"
+      },
+      "numberSearchers": { 
+        "description": "Num Searchers",
+        "type": "string"
+      },
+      "timeSpent": { 
+        "description": "time spent",
+        "type": "timestamp"
+      },
+      "searchSpeed": { 
+        "description": "search speed",
+        "type": "string"
+      },
+      "areaSearched": { 
+        "description": "total area size actually searched",
+        "type": "string"
+      },
+      "spacing": { 
+        "description": "spacing",
+        "type": "string"
+      },
+      "visibilityDist": { 
+        "description": "vis distance",
+        "type": "string"
+      },
+      "visibilityDetermined": { 
+        "description": "HOW WAS VISIBILITY DISTANCE DETERMINED",
+        "type": "string"
+      },
+      "areasSkipped": { 
+        "description": "Types of Areas Skipped Over",
+        "type": "string"
+      },
+      "directionPatternSearch": { 
+        "description": "Direction & Pattern of Search",
+        "type": "string"
+      }
+    }
+}
