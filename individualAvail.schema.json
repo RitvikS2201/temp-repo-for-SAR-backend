@@ -1,0 +1,113 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://isearch.calpoly.edu/template.schema.json",
+    "title": "Template",
+    "description": "A template for iSearch schemas",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Incident name",
+        "type": "string"
+      },
+      "datePrepared": {
+          "type": "timestamp"
+      },
+      "indName": {
+          "description": "The individual's name",
+          "type": "string"
+      },
+      "teamAffiliation": {
+          "type": "string"
+      },
+      "restAndRehab": {
+          "type": "object",
+          "properties": {
+              "hoursSinceLastSleep": {
+                  "description": "Hours since individual last slept",
+                  "type": "string"
+              },
+              "hoursOfSleep": {
+                  "description": "Hourse of sleep individual has had in last 24 hours",
+                  "type": "string"
+              },
+              "lastMeal": {
+                  "description": "When did person have last meal",
+                  "type": "string"
+              },
+              "describeIllness": {
+                  "description": "Describe individual's illness/injury relating to incident",
+                  "type": "string"
+              }
+              
+          }
+      },
+      "reassignmentAvailabilityInCurrent": {
+          "type": "string"
+      },
+      "reassignmentAvailabilityInFuture": {
+          "type": "string"
+      },
+      "timeAvailable": {
+          "type": "timestamp"
+      },
+      "notAvailabile": {
+          "type": "string"
+      },
+      "departingIncident": {
+          "type": "object",
+          "properties": {
+              "timeOfDeparture": {
+                  "type": "timestamp"
+              },
+              "timeOfArrival": {
+                  "type": "timestamp"
+              },
+              "areYouDriving": {
+                  "description": "Will you be driving?",
+                  "type": "boolean"
+              },
+              "otherPeople": {
+                  "description": "Will there be other people in the vehicle with you?",
+                  "type": "boolean"
+              },
+              "anotherAvailablePerson": {
+                  "description": "Is there another available person to share driving?",
+                  "type": "boolean"
+              },
+              "lessThanFiveHours": {
+                  "description": "Have you had less than 5 hours of sleep in last 24 hours?",
+                  "type": "boolean"
+              },
+              "currentlyAwake": {
+                  "description": "Are you currently feeling awake and alert",
+                  "type": "boolean"
+              },
+              "convoyVehicles": {
+                  "description": "Will you be in a convoy?",
+                  "type": "boolean"
+              },
+              "radioCommunications": {
+                  "description": "Do you have radio communications with convoy",
+                  "type": "boolean"
+              },
+              "medicationImpair": {
+                  "description": "Have you taken any medications that may impair your ability to drive?",
+                  "type": "boolean"
+              },
+              "pullOver": {
+                  "description": "Do you promise to pull over and take a nap if necessary?",
+                  "type": "boolean"
+              }
+              
+          }
+      },
+
+      "signatureOfIndividual": {
+          "type": "string"
+      },
+      "approvedBySafety": {
+          "type": "string"
+      }
+    },
+    "required": [ "name" ]
+  }
