@@ -1,0 +1,62 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://isearch.calpoly.edu/template.schema.json",
+    "title": "Radio Log",
+    "description": "Information regarding radio log",
+    "type": "object",
+    "properties": {
+        "incident": {
+            "description": "Incident Name",
+            "type": "string"
+        },
+        "timestamp": {
+            "description": "Date",
+            "type": "timestamp"
+        },
+        "location": {
+            "description": "Operator Location",
+            "type": "string"
+        },
+        "frequency": {
+            "description": "Frequency",
+            "type": "float"
+        },
+        "messages": {
+            "description": "Messages",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "time": {
+                        "type": "timestamp"
+                    },
+                    "team": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "preparedBy": {
+            "description": "Prepared By",
+            "type": "string"
+        },
+        "operater": {
+            "description": "Radio Operator",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "required": [
+        "incident"
+    ]
+}
