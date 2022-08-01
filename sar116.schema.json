@@ -1,0 +1,46 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://isearch.calpoly.edu/template.schema.json",
+    "title": "Sar 116",
+    "description": "Sar 116 schema",
+    "type": "object",
+    "properties": {
+      "assignmentNumber": { 
+        "description": "Assignment Number",
+        "type": "string"
+      },
+      "visibilitySearch": { 
+        "description": "visibility during search",
+        "type": "string"
+      },
+      "effortSubject": { 
+        "description": "Efforts to Attract a Responsive Subject",
+        "type": "string"
+      },
+      "abilityHear": { 
+        "description": "Ability to Hear Response",
+        "type": "timestamp"
+      },
+      "trailConditions": { 
+        "description": "trail conditions",
+        "type": "string"
+      },
+      "offTrailConditions": { 
+        "description": "off trail conditions",
+        "type": "string"
+      },
+      "mapTrails": { 
+        "description": "does map accurately reflect trails",
+        "type": "string"
+      },
+      
+      "locateFeatures": { 
+        "description": "Did you locate any features that could contain subj?",
+        "type": "string"
+      },
+      "trackConditions": { 
+        "description": "Tracking Conditions",
+        "type": "string"
+      }
+    }
+}
