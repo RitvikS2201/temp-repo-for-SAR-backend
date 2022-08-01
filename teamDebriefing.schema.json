@@ -1,0 +1,190 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://isearch.calpoly.edu/teamdebriefing.schema.json",
+    "title": "Team Debriefing",
+    "description": "Information regarding team debriefing",
+    "type": "object",
+    "properties": {
+     "Incident Name": {
+        "description": "Incident Name",
+        "type": "string"
+    },
+    "required": [ "field1" ]
+},
+           
+
+"operationalPeriod": {
+        "description": "Operational Periods of Searches",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "begin": {
+              "type": "timestamp"
+            },
+            "end": {
+              "type": "timestamp"
+            }
+          }
+        }
+      },
+
+ "assignmentNumber": {
+        "description": "Assignment Number data",
+        "type": "integer"
+      },
+
+ "resourceType": {
+        "description": "Resource Type data",
+        "type": "string"
+  },
+
+"assignmentSummary": {
+        "description": "Assignment Summary data",
+        "type": "string"
+  },
+
+"describeSearchEfforts": {
+        "description": "Describe Search Efforts In Assignment",
+        "type": "string"
+  },
+
+"describePortionsUnableSearch": {
+        "description": "Describe Search Efforts in Assignment",
+        "type": "string"
+  },
+
+"describeCluesTracksSigns": {
+        "description": "Describe any clues, track or sign located, or any pertinent trail interviews",
+        "type": "string"
+  },
+
+"describeHazards": {
+        "description": "Time Entered",
+        "type": "string"
+  },
+"suggestions": {
+        "description": "Suggestions for further search efforts in or near your assignment",
+        "type": "string"
+  },
+
+"timeEntered": {
+        "description": "Time Entered",
+        "type": "timestamp"
+  },
+
+"timeExited": {
+        "description": "Time Exited",
+        "type": "timestamp"
+  
+  },
+
+"timeSpent": {
+        "description": "Time Spent",
+        "type": "string"
+  },
+
+"podSummary": {
+        "description": "P.O.D Summary",
+        "type": "object",
+        "properties":
+        {
+          "Responsive Subject": {
+              "description": "Res Subject 90% for H 50% for M 10% for L",
+            "type": "object",
+            "properties": {
+              "H": {
+                "type": "bool"
+              },
+              "M": {
+                "type": "bool"
+              },
+              "L": {
+                "type": "bool"
+              }
+            }
+          },
+          "Unresponsive Subject": {
+            "description": "Unres Subject 90% for H 50% for M 10% for L",
+            "type": "object",
+            "properties": {
+              "H": {
+                "type": "bool"
+              },
+              "M": {
+                "type": "bool"
+              },
+              "L": {
+                "type": "bool"
+              }
+            }
+          },
+          "Clues": {
+             "description": "Clues 90% for H 50% for M 10% for L",
+            "type": "object",
+            "properties": {
+              "H": {
+                "type": "bool"
+              },
+              "M": {
+                "type": "bool"
+              },
+              "L": {
+                "type": "bool"
+              }
+            }
+          }
+        }
+      },
+
+"debriefer": {
+        "description": "Debriefer",
+        "type": "string"
+  },
+
+"dateTime": {
+        "description": "Debriefer",
+        "type": "timestamp"
+  },
+
+"attachments": {
+        "description": "Attachments",
+        "type": "object",
+        "properties": {
+              "Debriefing Map(s)": {
+                "type": "bool"
+              },
+              "Original Briefing Document": {
+                "type": "bool"
+              },
+              "Supplemental Debriefing Forms": {
+                "type": "bool"
+              },
+        "Other": {
+                "type": "string"
+              }
+            }
+  },
+
+"summary": {
+        "description": "Summary",
+        "type": "object",
+        "properties": {
+              "Nothing Significant Located": {
+                "type": "bool"
+              },
+              "Useful Information, Needs Review": {
+                "type": "bool"
+              },
+              "Potential Clues, Needs Urgent Review": {
+                "type": "bool"
+              },
+	    "Assignment Completed": {
+                "type": "bool"
+              },
+        "Assignment Not Completed": {
+    "type": "bool"
+            }
+        }
+    }
+}
