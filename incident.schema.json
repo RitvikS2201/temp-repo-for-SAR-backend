@@ -1,0 +1,74 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://isearch.calpoly.edu/incident.schema.json",
+    "title": "Incident",
+    "description": "Information regarding a SAR incident",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Incident Name",
+        "type": "string"
+      },
+      "operationalPeriods": {
+        "description": "Operational Periods of Searches",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "begin": {
+              "type": "timestamp"
+            },
+            "end": {
+              "type": "timestamp"
+            }
+          }
+        }
+      },
+      "summary": {
+        "description": "Incident Summary",
+        "type": "string"
+      },
+      "commPlans": {
+        "description": "Communications Plans",
+        "type": "object",
+        "properties":
+        {
+          "command": {
+            "description": "Team -- Base",
+            "type": "object",
+            "properties": {
+              "frequency": {
+                "type": "float"
+              },
+              "chDescription": {
+                "type": "string"
+              },
+              "channel": {
+                "type": "string"
+              }
+            }
+          },
+          "tactical": {
+            "description": "Team -- Team",
+            "type": "object",
+            "properties": {
+              "frequency": {
+                "type": "float"
+              },
+              "chDescription": {
+                "type": "string"
+              },
+              "channel": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "actionPlan": {
+        "description": "Action Plan Summary",
+        "type": "string"
+      }
+    },
+    "required": [ "name" ]
+  }
