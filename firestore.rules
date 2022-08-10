@@ -1,0 +1,251 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function validPeriod(period) {
+      return period is map &&
+             period.keys() == ['begin', 'end'] &&
+             period.begin is timestamp &&
+             period.end is timestamp &&
+             period.end > period.begin;
+    }
+	  
+    function validUser(auth, user) {
+      return user is map &&
+	     user.keys.hasOnly(['uid', 'name', 'phone', 'email') &&
+	     user.uid == auth.uid &&
+	     user.name == auth.displayName &&
+	     (user.phone == null || user.phone == auth.token.phone) &&
+	     (user.email == null || user.email == auth.token.email)
+    }
+  
+    match /incidents/{incidentId} {
+      function authIncidentR() {
+        return false;
+      }
+
+      function authIncidentW() {
+        return request.method != 'delete';
+      }
+
+      function validIncident() {
+        let name = request.data.name is string;
+
+        let summary = request.data.summary is string && request.data.summary.size() < 1024;
+
+        let commPlans = request.data.commPlans is map &&
+                        request.data.commPlans.keys() == ['command', 'tactical'] &&
+                        request.data.commPlans.command is map &&
+                        request.data.commPlans.command.keys() == ['frequency', 'chDescription', 'channel'] &&
+                        request.data.commPlans.command.frequency is float &&
+                        request.data.commPlans.command.chDescription is string &&
+                        request.data.commPlans.command.channel is string &&
+                        request.data.commPlans.tactical is map &&
+                        request.data.commPlans.tactical.keys() == ['frequency', 'chDescription', 'channel'] &&
+                        request.data.commPlans.tactical.frequency is float &&
+                        request.data.commPlans.tactical.chDescription is string &&
+                        request.data.commPlans.tactical.channel is string;
+
+        let action = request.data.actionPlan is string;
+
+	      let preparedBy = validUser(request.auth, request.data.preparedBy) 
+	      
+        let comments = !('comments' in request.data.keys()) || 
+                        (request.data.comments is string && 
+                         request.data.comments.size() < 2048);
+
+        return name && summary && commPlans && action && comments;
+      }
+
+      allow read: if authIncidentR();
+
+      allow create: if request.data.keys().hasOnly(['name', 'summary', 'commPlans', 'actionPlan', 'comments']) && 
+                       validIncident() && 
+                       authIncidentW();
+
+      allow update: if request.data.keys().hasOnly(['name', 'summary', 'commPlans', 'actionPlan', 'comments']) && 
+                       validIncident() && 
+                       authIncidentW();
+
+      allow delete: if authIncidentW('delete');
+
+      match /opPeriods/{periodId} {
+        function authOpPeriodR() {
+          return false;
+        }
+
+        function authOpPeriodW() {
+          return false;
+        }
+
+        function validOpPeriod() {
+          let comments = !('comments' in request.data.keys()) || 
+                        (request.data.comments is string && 
+                         request.data.comments.size() < 2048);
+
+          return comments && validPeriod({
+            "begin": request.data.begin,
+            "end": request.data.end
+          });
+        }
+        
+        allow read: if authPeriodR();
+
+        allow create: if request.data.keys().hasOnly(['begin', 'end']) && 
+                         validOpPeriod() && 
+                         authOpPeriodW();
+
+        allow update: if request.data.keys().hasOnly(['begin', 'end']) && 
+                         validOpPeriod() && 
+                         authOpPeriodW();
+
+        allow delete: if authOpPeriodW('delete');
+      }
+
+      match /subjects/{subjectId} {
+        function authSubjectR() {
+          return false;
+        }
+
+        function authSubjectW() {
+          return false;
+        }
+
+        function validSubject() {
+          let comments = !('comments' in request.data.keys()) || 
+                        (request.data.comments is string && 
+                         request.data.comments.size() < 2048);
+
+          return comments;
+        }
+        
+        allow read: if authSubjectR();
+
+        allow create: if request.data.keys().hasOnly(['comments']) && 
+                         validSubject() && 
+                         authSubjectW();
+
+        allow update: if request.data.keys().hasOnly(['comments']) && 
+                         validSubject() && 
+                         authSubjectW();
+
+        allow delete: if authSubjectW('delete');
+      }
+
+      match /debriefings/{incidentId} {
+        function authDebriefR() {
+          return false;
+        }
+
+        function authDebriefW() {
+          return request.method != 'delete';
+        }
+
+        function validDebrief() {
+          let assignmentNumber = request.data.assignmentNumber is string;
+
+          let visibilitySearch = request.data.visibilitySearch is string && request.data.visibilitySearch.size() < 1024;
+          let effortSubject = request.data.effortSubject is string && request.data.effortSubject.size() < 1024;
+          let abilityHear = request.data.abilityHear is string && request.data.abilityHear.size() < 1024;
+          let trailConditions = request.data.trailConditions is string && request.data.trailConditions.size() < 1024;
+          let offTrailConditions = request.data.offTrailConditions is string && request.data.offTrailConditions.size() < 1024;
+          let mapTrails = request.data.mapTrails is string && request.data.mapTrails.size() < 1024;
+          let locateFeatures = request.data.locateFeatures is string && request.data.locateFeatures.size() < 1024;
+          let trackConditions = request.data.trackConditions is string && request.data.trackConditions.size() < 1024;
+          
+          return assignmentNumber && visibilitySearch && effortSubject && abilityHear && trailConditions && offTrailConditions && mapTrails && locateFeatures && trackConditions
+        }
+
+        allow read: if authDebriefR();
+
+        allow create: if request.data.keys().hasOnly(['assignmentNumber', 'visibilitySearch', 'effortSubject', 'abilityHear', 'trailConditions', 'offTrailConditions','mapTrails','locateFeatures','trackConditions']) && 
+                        validDebrief() && 
+                        authDebriefW();
+
+        allow update: if request.data.keys().hasOnly(['assignmentNumber', 'visibilitySearch', 'effortSubject', 'abilityHear', 'trailConditions', 'offTrailConditions','mapTrails','locateFeatures','trackConditions']) && 
+                        validDebrief() && 
+                        authDebriefW();
+
+        allow delete: if authDebriefW('delete')
+      }
+
+      match /clues/{clueId} {
+        function authClueR() {
+          return false;
+        }
+
+        function authClueW() {
+          return false;
+        }
+ 
+        function validClue() {
+          let comments = !('comments' in request.data.keys()) || 
+                        (request.data.comments is string && 
+                         request.data.comments.size() < 2048);
+          return false;
+        }
+
+        allow read: if authClueR();
+
+        allow create: if request.data.keys().hasOnly(['comments']) && 
+                         validClue() && 
+                         authClueW();
+
+        allow update: if request.data.keys().hasOnly(['comments']) && 
+                         validClue() && 
+                         authClueW();
+
+        allow delete: if authClueW('delete');
+      }
+
+      match /availability/{availabilityId} {
+        function authAvailabilityR() {
+          return false;
+        }
+
+        function authAvailabilityW() {
+          return false;
+        }
+ 
+        function validAvailability() {
+          let date = request.data.datePrepared is timestamp;
+          let name = request.data.name is string;
+          let team = request.data.teamAffiliation is string &&
+                     request.auth != null && request.auth.uid != null &&
+                     (request.method == 'update' && request.data.teamAffiliation == resource.data.teamAffiliation) ||
+                     request.data.teamAffiliation in get(/databases/$(databases)/documents/users/$(request.auth.uid)).data.teams;
+          let rest = request.data.restAndRehab is map &&
+                     request.data.restAndRehab.keys() == ['hoursSinceLastSleep', 'hoursOfSleep', 'lastMeal', 'describeIllness'] &&
+                     request.data.restAndRehab.hoursSinceLastSleep is float &&
+                     request.data.restAndRehab.hoursSinceLastSleep >= 0 &&
+                     request.data.restAndRehab.hoursOfSleep is float &&
+                     request.data.restAndRehab.hoursOfSleep >= 0 &&
+                     request.data.lastMeal is timestamp &&
+                     request.data.describeIllness is string;
+
+          let comments = !('comments' in request.data.keys()) || 
+                          (request.data.comments is string && 
+                           request.data.comments.size() < 2048);
+
+          return date && name && team && rest && comments;
+        }
+
+        allow read: if authAvailabilityR();
+
+        allow create: if request.data.keys().hasOnly(['datePrepared', 'name', 'teamAffiliation', 'restAndRehab',
+                         'reassignmentAvailabilityInCurrent', 'reassignmentAvailabilityInFuture',
+                         'timeAvailable', 'notAvailabile', 'departingIncident', 'approvedBySafety', 'comments']) && 
+                         validAvailability() && 
+                         authAvailabilityW();
+
+        allow update: if request.data.keys().hasOnly(['datePrepared', 'name', 'teamAffiliation', 'restAndRehab',
+                        'reassignmentAvailabilityInCurrent', 'reassignmentAvailabilityInFuture',
+                        'timeAvailable', 'notAvailabile', 'departingIncident', 'approvedBySafety', 'comments']) && 
+                         validAvailability() && 
+                         authAvailabilityW();
+
+        allow delete: if authAvailabilityW('delete');
+      }
+    }
+	}
+}
