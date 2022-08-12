@@ -1,0 +1,138 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://isearch.calpoly.edu/template.schema.json",
+    "title": "Sar 111",
+    "description": "Sar 111 schema",
+    "type": "object",
+    "properties": {
+        "assignmentNumber": { 
+        "description": "Assignment Number",
+        "type": "string"
+        },
+        "scentConditions": { 
+        "description": "Scent Conditions",
+        "type": "object",
+        "properties": {
+            "timeOfObersvation": { 
+                "description": "Time of Observation",
+                "type": "array",
+                "properties": {
+                    "type": "string"
+                }
+            },
+            "windFrom": { 
+                "description": "Wind From",
+                "type": "array",
+                "properties": {
+                    "type": "string"
+                }
+            },
+            "windSpeed": { 
+                "description": "Wind Speed",
+                "type": "array",
+                "properties": {
+                    "type": "string"
+                }
+            },
+            "sixFootShadow": { 
+                "description": "6 Foot Shadow",
+                "type": "array",
+                "properties": {
+                    "type": "string"
+                }
+            },
+            "cloudCover": { 
+                "description": "Cloud Cover",
+                "type": "array",
+                "properties": {
+                    "type": "string"
+                }
+            },
+            
+            "moisture": { 
+                "description": "Moisture",
+                "type": "array",
+                "properties": {
+                    "type": "string"
+                }
+            },
+            "temp": { 
+                "description": "Temp",
+                "type": "array",
+                "properties": {
+                    "type": "string"
+                }
+            },
+            "otherFactors": { 
+                "description": "Other Factors",
+                "type": "array",
+                "properties": {
+                    "type": "string"
+                }
+            },
+            "summaryOfConditions": { 
+                "description": "Summary Of Conditions",
+                "type": "array",
+                "properties": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+        "areaSearchDogs": { 
+        "description": "Area Search Dogs",
+        "type": "object",
+        "properties": {
+            "searchTechnique": { 
+                "description": "Search Technique",
+                "type": "object",
+                "properties": {
+                    "type": "string"
+                }
+                },
+            "sweepSpacing": { 
+                "description": "Sweep Spacing",
+                "type": "string"
+            },
+            "pod": { 
+                "description": "Pod",
+                "type": "string"
+            },
+            "areaSearchDogs": { 
+                "description": "Areas Where Dog Showed Interest",
+                "type": "string"
+            },
+            "shouldAreaBeResearched": { 
+                "description": "Should Portions Of The Area Be Researched During Better Scent Conditions",
+                "type": "string"
+            }
+        }
+    },
+        "scentSpecificDogs": { 
+        "description": "Scent Specific Dogs",
+        "type": "object",
+        "properties": {
+            "describeCurrentLocation": { 
+                "description": "Describe The Current Location And Usability Of The Scent Article",
+                "type": "string"
+                },
+            "describeTheScent": { 
+                "description": "Describe The Scent Article, Its Quality And Usability",
+                "type": "string"
+                },
+            "identifiedByDog": { 
+                "description": "Scent Trails Identified By Dog",
+                "type": "string"
+                },
+            "supportingEvidence": { 
+                "description": "Supporting Evidence Found (Tracks, Sign, Clues)",
+                "type": "string"
+                },
+            "whyAndWhere": { 
+                "description": "Why And Where The Scent Trail Ended",
+                "type": "string"
+                }
+        }
+    }
+}
+}
