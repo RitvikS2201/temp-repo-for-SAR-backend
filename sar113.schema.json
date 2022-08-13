@@ -1,0 +1,25 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://isearch.calpoly.edu/template.schema.json",
+    "title": "Sar 113",
+    "description": "Sar 113 schema",
+    "type": "object",
+    "properties": {
+      "assignmentNumber": { 
+        "description": "Assignment Number",
+        "type": "string"
+      },
+      "describeArea": { 
+        "description": "Describe Areas Youu Were Unable To Search Due To Terrain Conditions Or Hazards",
+        "type": "string"
+      },
+      "differentResourceType": { 
+        "description": "Could These Areas Be Better Searched With A Different Type Of Resource",
+        "type": "timestamp"
+      },
+      "furtherEquestrianSuggestions": { 
+        "description": "Suggestions For Further Equestrian Search Efforts In Or Near Your Assignment",
+        "type": "string"
+        }
+    }
+}
